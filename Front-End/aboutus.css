@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.background-video {
+    position: relative;
+}
+
+#bg-video {
+    width: 100%;
+    height: auto;
+    filter: blur(5px);
+}
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.label {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 10px;
+}
+
+footer {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+}
+
+footer a img {
+    width: 150px;
+    margin: 10px;
+}
