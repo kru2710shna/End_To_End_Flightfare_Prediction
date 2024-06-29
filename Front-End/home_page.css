@@ -2,44 +2,45 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0; /* Background color for the entire page */
+    background-color: #f0f0f0;
 }
 
-.video-container {
+.video-container, .video-container-form {
     position: relative;
     width: 100%;
-    height: 100vh; /* Full height of the viewport */
+    height: 100vh;
     overflow: hidden;
 }
 
-#bg-video {
+#bg-video, #bg-video-form {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100%;
-    height: auto;
-    min-height: 100%;
+    width: auto;
+    height: 100%;
+    min-width: 100%;
     transform: translate(-50%, -50%);
+    object-fit: cover;
 }
 
-.overlay {
+.overlay, .overlay-form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
     text-align: center;
-    z-index: 1; /* Ensure it's above the video */
+    z-index: 1;
+    width: 100%;
 }
 
 .horizontal-nav {
     width: 100%;
-    background-color: #708090; /* Smokey grey background */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: absolute;
-    bottom: 0; /* Position at the bottom of the video container */
+    bottom: 0;
     left: 0;
-    z-index: 2; /* Ensure it's above the content */
+    z-index: 2;
 }
 
 .horizontal-nav ul {
@@ -47,105 +48,98 @@ body {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: space-around; /* Distribute items evenly */
+    justify-content: space-around;
 }
 
 .horizontal-nav ul li {
-    margin: 10px 0;
+    margin: 0px 0;
     text-align: center;
 }
 
 .horizontal-nav ul li a {
     text-decoration: none;
     color: #fff;
-    padding: 10px 20px; /* Adjust padding for spacing */
+    padding: 10px 20px;
     display: block;
 }
 
 .horizontal-nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Hover background color */
-    color: #000; /* Change text color on hover */
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #000;
 }
 
 #content {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 0px;
+    padding: 10px;
     text-align: center;
-    z-index: 1; /* Ensure it's above the video */
+    z-index: 2;
+    position: relative;
+    background-color: #001c28;
+    color: white;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 #form-container {
-    display: none;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent background */
     padding: 20px;
-    text-align: center;
-    z-index: 1; /* Ensure it's above the video */
+    border-radius: 10px;
+    z-index: 2;
+    position: relative;
 }
 
 #form-container h3 {
     margin-bottom: 20px;
 }
 
-.moving-text {
-    position: relative;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 100%;
+.form-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
-.moving-text:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, #fff 50%, transparent);
-    animation: move 10s linear infinite;
-}
-
-@keyframes move {
-    0% {
-        left: 100%;
-    }
-    100% {
-        left: -100%;
-    }
+.form-group {
+    margin: 0 10px;
+    width: 200px;
 }
 
 #form-container label {
     display: block;
     margin: 10px 0 5px;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
+    color: #fff;
 }
 
 #form-container input, #form-container select {
-    padding: 10px;
-    width: 200px;
+    width: 100%;
+    padding: 10px 5px;
     margin-bottom: 10px;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
+    border: none;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    outline: none;
+}
+
+#form-container input::placeholder, #form-container select::placeholder {
+    color: #ccc;
 }
 
 #form-container button {
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
     margin-top: 10px;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
 }
 
 #form-container button:hover {
     background-color: #45a049;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
 }
 
 #prediction-result {
@@ -155,12 +149,13 @@ body {
 }
 
 footer {
-    background-color: #f8f8f8;
+    background-color: #001c28;
     padding: 20px;
     text-align: center;
+    color: white;
 }
 
 footer a img {
-    width: 150px;
+    width: 100px;
     margin: 10px;
 }

@@ -9,18 +9,30 @@
 <body>
     <div class="background-video">
         <video autoplay muted loop id="bg-video">
-            <source src="/Users/krushna/Downloads/number_background1.mov" type="video/mp4">
+            <source src="/Users/krushna/Downloads/5928077-hd_1080_1920_30fps.mp4" type="video/mp4">
         </video>
         <div class="overlay">
-            <div class="label">Explore More</div>
-            <div class="label">Model Card</div>
+            <div class="heading">by Idon'tKnow</div>
+            <div class="labels">
+                <div class="label left" onclick="exploreMore()">Explore More</div>
+                <div class="label right" onclick="modelCard()">Model Card</div>
+            </div>
         </div>
     </div>
+
+    <nav class="horizontal-nav">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+        </ul>
+    </nav>
 
     <footer>
         <p>Company Info</p>
         <a href="https://play.google.com/store"><img src="playstore_logo.png" alt="Get it on Playstore"></a>
         <a href="https://www.apple.com/app-store/"><img src="appstore_logo.png" alt="Download on the App Store"></a>
     </footer>
+
+    <script src="aboutus.js"></script>
 </body>
 </html>

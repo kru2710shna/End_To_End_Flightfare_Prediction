@@ -7,12 +7,19 @@ body {
 
 .background-video {
     position: relative;
+    height: 100vh; /* Full height of the viewport */
+    width: 100%;
+    overflow: hidden;
 }
 
 #bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 100%;
-    height: auto;
-    filter: blur(5px);
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
 }
 
 .overlay {
@@ -21,8 +28,23 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 80%;
+}
+
+.heading {
+    font-size: 2em;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px; /* Adjust width as needed */
 }
 
 .label {
@@ -31,12 +53,58 @@ body {
     font-size: 1.5em;
     text-align: center;
     margin: 10px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.label.left {
+    text-align: left;
+}
+
+.label.right {
+    text-align: right;
+}
+
+.horizontal-nav {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Transparent background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    position: absolute; /* Position it absolutely within its container */
+    bottom: 0; /* Align it to the bottom of the viewport */
+}
+
+.horizontal-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around; /* Distribute items evenly */
+}
+
+.horizontal-nav ul li {
+    margin: 0;
+    text-align: center;
+}
+
+.horizontal-nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px; /* Adjust padding for spacing */
+    display: block;
+}
+
+.horizontal-nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Hover background color */
+    color: #000; /* Change text color on hover */
 }
 
 footer {
     background-color: #f8f8f8;
     padding: 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 footer a img {

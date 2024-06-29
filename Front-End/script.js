@@ -1,14 +1,16 @@
 window.addEventListener('scroll', function() {
-    var formContainer = document.getElementById('form-container');
-    var contentPosition = document.getElementById('content').getBoundingClientRect().bottom;
-    var formPosition = formContainer.getBoundingClientRect().top;
-    var windowHeight = window.innerHeight;
+    var content = document.getElementById('content');
+    var videoContainer = document.querySelector('.video-container');
 
-    if (contentPosition < windowHeight && formPosition > windowHeight) {
-        formContainer.style.display = 'block';
-        setTimeout(function() {
-            formContainer.style.opacity = 1;
-        }, 100);
+    if (!content || !videoContainer) return;
+
+    var contentRect = content.getBoundingClientRect();
+    var videoRect = videoContainer.getBoundingClientRect();
+
+    if (contentRect.top < videoRect.bottom && contentRect.bottom > videoRect.top) {
+        content.style.zIndex = 1; // Content goes under video container
+    } else {
+        content.style.zIndex = 2; // Content stays above video container
     }
 });
 
@@ -53,76 +55,5 @@ document.addEventListener('DOMContentLoaded', function() {
         span.textContent = text;
         span.style.animationDelay = (i * 3) + 's';
         movingTextContainer.appendChild(span);
-    }
-
-    // Initialize date pickers
-    document.getElementById('departure-date').addEventListener('click', function() {
-        showDatePicker(this);
-    });
-
-    document.getElementById('arrival-date').addEventListener('click', function() {
-        showDatePicker(this);
-    });
-
-    function showDatePicker(input) {
-        var datePicker = document.createElement('div');
-        datePicker.className = 'date-picker';
-        datePicker.innerHTML = `
-            <div class="date-picker-header">
-                <button class="date-picker-btn today-btn">Today</button>
-                <button class="date-picker-btn close-btn">Close</button>
-            </div>
-            <div class="date-picker-body">
-                <div class="date-picker-section">
-                    <label>Day</label>
-                    <select class="day-select">${generateOptions(1, 31)}</select>
-                </div>
-                <div class="date-picker-section">
-                    <label>Month</label>
-                    <select class="month-select">${generateOptions(1, 12)}</select>
-                </div>
-                <div class="date-picker-section">
-                    <label>Year</label>
-                    <select class="year-select">${generateOptions(2020, 2030)}</select>
-                </div>
-            </div>
-        `;
-
-        input.parentNode.appendChild(datePicker);
-
-        datePicker.querySelector('.today-btn').addEventListener('click', function() {
-            var today = new Date();
-            input.value = formatDate(today);
-            datePicker.remove();
-        });
-
-        datePicker.querySelector('.close-btn').addEventListener('click', function() {
-            datePicker.remove();
-        });
-
-        datePicker.querySelectorAll('select').forEach(function(select) {
-            select.addEventListener('change', function() {
-                var day = datePicker.querySelector('.day-select').value;
-                var month = datePicker.querySelector('.month-select').value;
-                var year = datePicker.querySelector('.year-select').value;
-                var date = new Date(year, month - 1, day);
-                input.value = formatDate(date);
-            });
-        });
-    }
-
-    function generateOptions(start, end) {
-        var options = '';
-        for (var i = start; i <= end; i++) {
-            options += `<option value="${i}">${i}</option>`;
-        }
-        return options;
-    }
-
-    function formatDate(date) {
-        var day = ('0' + date.getDate()).slice(-2);
-        var month = ('0' + (date.getMonth() + 1)).slice(-2);
-        var year = date.getFullYear();
-        return `${day}/${month}/${year}`;
     }
 });

@@ -13,7 +13,7 @@
         </video>
         <div class="overlay">
             <h1>Checkout Flight's Fare</h1>
-            <p>by Idont'know</p>
+            <p>by Idon'tknow</p>
         </div>
     </div>
 
@@ -25,55 +25,83 @@
     </nav>
 
     <div id="content">
-        <h2>Idont'know Price</h2>
+        <h2>Idon'tknow Price</h2>
         <p>Scroll down to explore more about our predictions and fare analysis.</p>
     </div>
-
-    <div id="form-container">
-        <h3 class="moving-text">One-Way Journey</h3>
-        <form id="fare-form">
-            <label for="departure-date">Departure Date:</label>
-            <input type="text" id="departure-date" name="departure-date" readonly><br>
-
-            <label for="arrival-date">Arrival Date:</label>
-            <input type="text" id="arrival-date" name="arrival-date" readonly><br>
-
-            <label for="from-location">From:</label>
-            <select id="from-location" name="from-location">
-                <option value="Delhi">Delhi</option>
-                <option value="Kolkata">Kolkata</option>
-                <option value="Bangalore">Bangalore</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Chennai">Chennai</option>
-            </select><br>
-
-            <label for="to-location">To:</label>
-            <select id="to-location" name="to-location">
-                <option value="Cochin">Cochin</option>
-                <option value="Bangalore">Bangalore</option>
-                <option value="Delhi">Delhi</option>
-                <option value="New Delhi">New Delhi</option>
-                <option value="Hyderabad">Hyderabad</option>
-                <option value="Kolkata">Kolkata</option>
-            </select><br>
-
-            <label for="stops">Stops:</label>
-            <input type="text" id="stops" name="stops"><br>
-
-            <label for="airlines">Airlines:</label>
-            <input type="text" id="airlines" name="airlines"><br>
-
-            <button type="submit">Predict Fare</button>
-        </form>
-        <div id="prediction-result"></div>
+    
+    <div class="video-container-form">
+        <video autoplay muted loop id="bg-video-form">
+            <source src="/Users/krushna/Downloads/8044824-hd_1080_1920_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-form">
+            <div id="form-container">
+                <h3>One-Way Journey</h3>
+                <form id="fare-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departure-date">Departure Date:</label>
+                            <input type="text" id="departure-date" name="departure-date" placeholder="Select Date" >
+                        </div>
+                        <div class="form-group">
+                            <label for="from-location">From:</label>
+                            <select id="from-location" name="from-location">
+                                <option value="Delhi">Delhi</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Chennai">Chennai</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="arrival-date">Arrival Date:</label>
+                            <input type="text" id="arrival-date" name="arrival-date" placeholder="Select Date" >
+                        </div>
+                        <div class="form-group">
+                            <label for="to-location">To:</label>
+                            <select id="to-location" name="to-location">
+                                <option value="Cochin">Cochin</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="New Delhi">New Delhi</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Kolkata">Kolkata</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="stops">Stops:</label>
+                            <input type="text" id="stops" name="stops" placeholder="Enter Stops">
+                        </div>
+                        <div class="form-group">
+                            <label for="airlines">Airlines:</label>
+                            <input type="text" id="airlines" name="airlines" placeholder="Enter Airlines">
+                        </div>
+                    </div>
+                    <button type="submit">Predict Fare</button>
+                </form>
+                <div id="prediction-result"></div>
+            </div>
+        </div>
     </div>
-
-    <footer>
-        <p>Company Info</p>
-        <a href="https://play.google.com/store"><img src="playstore_logo.png" alt="Get it on Playstore"></a>
-        <a href="https://www.apple.com/app-store/"><img src="appstore_logo.png" alt="Download on the App Store"></a>
+    <footer class="footer">
+        <p>Idon'tknow</p>
+        <a href="https://play.google.com/store">
+            <img src="/Users/krushna/Downloads/play-store-new-logo-4.jpg" alt="Get it on Playstore" style="width: 60px;">
+        </a>
+        <a href="https://www.apple.com/app-store/">
+            <img src="/Users/krushna/End-End-ML-Flight-Fare-42/Front-End/Sources/Videos/Images/App-Store-Logo.png" alt="Download on the App Store">
+        </a>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // JavaScript to reset form fields on page reload/refresh
+        window.onload = function() {
+            document.getElementById("fare-form").reset();
+        };
+    </script>
 </body>
 </html>
