@@ -1,17 +1,19 @@
 from flask import Flask, request, render_template
 from flask_cors import cross_origin
 import pandas as pd
-import joblib
 
-app = Flask(__name__, template_folder='templates')
-model = joblib.load('model_packet')
+import pickle
 
-@app.route("/")
+app = Flask(__name__, static_url_path='/static')
+with open('finalfile.pkl', 'rb') as file:
+    model = pickle.load(file)
+
+@app.route("/" , methods=['GET'])
 @cross_origin()
 def home():
     return render_template('home.html')
 
-@app.route("/predict", methods=["GET", "POST"])
+@app.route("/predict", methods=["POST"])
 @cross_origin()
 def predict():
     if request.method == "POST":

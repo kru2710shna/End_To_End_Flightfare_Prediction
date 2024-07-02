@@ -1,6 +1,6 @@
 Flask
 Flask-Cors
-joblib
+pickle
 numpy
 pandas
 scikit-learn
