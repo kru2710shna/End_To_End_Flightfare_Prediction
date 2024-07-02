@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idon'tKnow.Price.com</title>
     <link rel="stylesheet" href="home_page.css">
-    <!-- Add any additional CSS files here -->
-    <link rel="stylesheet" href="path/to/other.css">
 </head>
 <body>
     <div class="video-container">
@@ -39,7 +37,7 @@
             <div id="form-container">
                 <h3>One-Way Journey</h3>
                 <!-- Updated form with method and action attributes -->
-                <form id="fare-form" method="POST" action="/predict">
+                <form id="fare-form" method="POST" action="\predict">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="departure-date">Departure Date:</label>
@@ -95,7 +93,7 @@
                     </div>
                     <button type="submit">Predict Fare</button>
                 </form>
-                <div id="prediction-result"></div>
+                <div id="prediction_text">{{ prediction_text }}</div>
             </div>
         </div>
     </div>
@@ -110,11 +108,7 @@
         </a>
     </footer>
 
-    <!-- Include your JavaScript files -->
     <script src="script.js"></script>
-    <!-- Add any additional JavaScript files here -->
-    <script src="path/to/other.js"></script>
-
     <script>
         // JavaScript to reset form fields on page reload/refresh
         window.onload = function() {

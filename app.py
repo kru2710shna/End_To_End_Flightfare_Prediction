@@ -1,24 +1,25 @@
 from flask import Flask, request, render_template
 from flask_cors import cross_origin
 import pandas as pd
-import pickle
+import joblib
 
-app = Flask(__name__, template_folder='Front-End')
-model = pickle.load(open("flight_rf.pkl", "rb"))
+app = Flask(__name__, template_folder='templates')
+model = joblib.load('model_packet')
 
 @app.route("/")
 @cross_origin()
 def home():
-    return render_template("home.html")
+    return render_template('home.html')
 
 @app.route("/predict", methods=["GET", "POST"])
 @cross_origin()
 def predict():
     if request.method == "POST":
-        # Date_of_Journey
         date_dep = request.form["departure-date"]
-        Journey_day = pd.to_datetime(date_dep, format="%Y-%m-%dT%H:%M").day
-        Journey_month = pd.to_datetime(date_dep, format="%Y-%m-%dT%H:%M").month
+        
+        # Date of Journey
+        Day_of_journey = pd.to_datetime(date_dep, format="%Y-%m-%dT%H:%M").day
+        Month_of_journey = pd.to_datetime(date_dep, format="%Y-%m-%dT%H:%M").month
 
         # Departure
         Dep_hour = pd.to_datetime(date_dep, format="%Y-%m-%dT%H:%M").hour
@@ -26,30 +27,31 @@ def predict():
 
         # Arrival
         date_arr = request.form["arrival-date"]
-        Arrival_hour = pd.to_datetime(date_arr, format="%Y-%m-%dT%H:%M").hour
-        Arrival_min = pd.to_datetime(date_arr, format="%Y-%m-%dT%H:%M").minute
+        Arr_hour = pd.to_datetime(date_arr, format="%Y-%m-%dT%H:%M").hour
+        Arr_minute = pd.to_datetime(date_arr, format="%Y-%m-%dT%H:%M").minute
 
         # Duration
-        dur_hour = abs(Arrival_hour - Dep_hour)
-        dur_min = abs(Arrival_min - Dep_min)
+        dur_hour = abs(Arr_hour - Dep_hour)
+        dur_min = abs(Arr_minute - Dep_min)
 
         # Total Stops
         Total_Stops = int(request.form["stops"])
 
         # Airline
         airline = request.form['airlines']
+        
         airline_dict = {
-            'Airline_Air India': 0, 'Airline_GoAir': 0, 'Airline_IndiGo': 0,
-            'Airline_Jet Airways': 0, 'Airline_Multiple carriers': 0,
-            'Airline_Multiple carriers Premium economy': 0, 'Airline_SpiceJet': 0,
-            'Airline_Trujet': 0, 'Airline_Vistara': 0, 'Airline_Vistara Premium economy': 0
+            'Air India': 0, 'GoAir': 0, 'IndiGo': 0,
+            'Multiple carriers': 0, 'Multiple carriers Premium economy': 0, 
+            'SpiceJet': 0,  'Trujet': 0, 'Vistara': 0, 
+            'Vistara Premium economy': 0
         }
         airline_dict[airline] = 1
 
         # Source
         Source = request.form["from-location"]
         source_dict = {
-            'Source_Chennai': 0, 'Source_Delhi': 0, 'Source_Kolkata': 0, 'Source_Mumbai': 0
+            'Source_Chennai': 0, 'Source_Delhi': 0, 'Source_Kolkata': 0, 'Source_Mumbai': 0, 'Source_Banglore':0
         }
         source_dict[Source] = 1
 
@@ -57,24 +59,32 @@ def predict():
         Destination = request.form["to-location"]
         dest_dict = {
             'Destination_Cochin': 0, 'Destination_Delhi': 0, 'Destination_New Delhi': 0,
-            'Destination_Hyderabad': 0, 'Destination_Kolkata': 0
+            'Destination_Hyderabad': 0, 'Destination_Kolkata': 0, 'Destination_Banglore':0
         }
+        
         dest_dict[Destination] = 1
 
         # Predicting Fare
         prediction = model.predict([[
-            Total_Stops, Journey_day, Journey_month, Dep_hour, Dep_min,
-            Arrival_hour, Arrival_min, dur_hour, dur_min,
-            airline_dict['Airline_Air India'], airline_dict['Airline_GoAir'],
-            airline_dict['Airline_IndiGo'], airline_dict['Airline_Jet Airways'],
-            airline_dict['Airline_Multiple carriers'],
-            airline_dict['Airline_Multiple carriers Premium economy'],
-            airline_dict['Airline_SpiceJet'], airline_dict['Airline_Trujet'],
-            airline_dict['Airline_Vistara'], airline_dict['Airline_Vistara Premium economy'],
-            source_dict['Source_Chennai'], source_dict['Source_Delhi'],
-            source_dict['Source_Kolkata'], source_dict['Source_Mumbai'],
-            dest_dict['Destination_Cochin'], dest_dict['Destination_Delhi'],
-            dest_dict['Destination_Hyderabad'], dest_dict['Destination_Kolkata'],
+            Total_Stops, Day_of_journey, Month_of_journey, Dep_hour, Dep_min,
+            Arr_hour, Arr_minute, dur_hour, dur_min,
+            airline_dict['Air India'], 
+            airline_dict['GoAir'],
+            airline_dict['IndiGo'],
+            airline_dict['Multiple carriers'],
+            airline_dict['Multiple carriers Premium economy'],
+            airline_dict['SpiceJet'], 
+            airline_dict['Trujet'],
+            airline_dict['Vistara'], 
+            airline_dict['Vistara Premium economy'],
+            source_dict['Source_Chennai'], 
+            source_dict['Source_Delhi'],
+            source_dict['Source_Kolkata'], 
+            source_dict['Source_Mumbai'],
+            dest_dict['Destination_Cochin'], 
+            dest_dict['Destination_Delhi'],
+            dest_dict['Destination_Hyderabad'], 
+            dest_dict['Destination_Kolkata'],
             dest_dict['Destination_New Delhi']
         ]])
 

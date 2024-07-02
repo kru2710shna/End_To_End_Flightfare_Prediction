@@ -1,9 +1,6 @@
-click
-distlib
 Flask
 Flask-Cors
 joblib
-MarkupSafe
 numpy
 pandas
 scikit-learn
