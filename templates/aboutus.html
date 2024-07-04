@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <link rel="stylesheet" href="aboutus.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aboutus.css') }}">
 </head>
 <body>
     <div class="background-video">
         <video autoplay muted loop id="bg-video">
-            <source src="/Users/krushna/Downloads/5928077-hd_1080_1920_30fps.mp4" type="video/mp4">
+            <source src="{{ url_for('static', filename='videos/5928077-hd_1080_1920_30fps.mp4') }}" type="video/mp4">
         </video>
         <div class="overlay">
             <div class="heading">by Idon'tKnow</div>
@@ -22,17 +22,17 @@
 
     <nav class="horizontal-nav">
         <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
         </ul>
     </nav>
 
     <footer>
         <p>Company Info</p>
-        <a href="https://play.google.com/store"><img src="playstore_logo.png" alt="Get it on Playstore"></a>
-        <a href="https://www.apple.com/app-store/"><img src="appstore_logo.png" alt="Download on the App Store"></a>
+        <a href="https://play.google.com/store"><img src="{{ url_for('static', filename='images/playstore_logo.png') }}" alt="Get it on Playstore"></a>
+        <a href="https://www.apple.com/app-store/"><img src="{{ url_for('static', filename='images/appstore_logo.png') }}" alt="Download on the App Store"></a>
     </footer>
 
-    <script src="aboutus.js"></script>
+    <script src="{{ url_for('static', filename='js/aboutus.js') }}"></script>
 </body>
 </html>
