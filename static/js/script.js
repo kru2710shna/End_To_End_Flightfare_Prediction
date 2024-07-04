@@ -44,16 +44,24 @@ document.getElementById('fare-form').addEventListener('submit', function(event) 
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize moving text
-    var movingTextContainer = document.querySelector('.moving-text');
-    var text = movingTextContainer.textContent;
-    movingTextContainer.innerHTML = '';
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
 
-    for (let i = 0; i < 3; i++) {
-        let span = document.createElement('span');
-        span.textContent = text;
-        span.style.animationDelay = (i * 3) + 's';
-        movingTextContainer.appendChild(span);
-    }
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        fetch('/predict', {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            const predictionText = data.prediction_text;
+            const predictionResultDiv = document.getElementById('prediction-result');
+            predictionResultDiv.innerHTML = `<p>${predictionText}</p>`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
 });
