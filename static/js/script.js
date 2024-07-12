@@ -1,3 +1,9 @@
+// JavaScript to reset form fields on page reload/refresh
+window.onload = function() {
+    document.getElementById("fare-form").reset();
+};
+
+// Other existing JavaScript code
 window.addEventListener('scroll', function() {
     var content = document.getElementById('content');
     var videoContainer = document.querySelector('.video-container');

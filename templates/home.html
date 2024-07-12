@@ -36,7 +36,7 @@
         <div class="overlay-form">
             <div id="form-container">
                 <h3>One-Way Journey</h3>
-                <form method="POST" action="{{ url_for('predict') }}">
+                <form id="fare-form" method="POST" action="{{ url_for('predict') }}">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="departure-date">Departure Date:</label>
@@ -102,7 +102,7 @@
     <footer class="footer">
         <p>Idon'tknow</p>
         <a href="https://play.google.com/store">
-            <img src="{{ url_for('static', filename='images/Google-play-icon-design-on-transparent-background-PNG.png') }}" alt="Get it on Playstore" style="width: 60px;">
+            <img src="{{ url_for('static', filename='images/Google-play-icon-design-on-transparent-background-PNG.png') }}" alt="Get it on Playstore" style="width: 50px;">
         </a>
         <a href="https://www.apple-App-Store-Logo.png.com/app-store/">
             <img src="{{ url_for('static', filename='images/App-Store-Logo.png') }}" alt="Download on the App Store">
