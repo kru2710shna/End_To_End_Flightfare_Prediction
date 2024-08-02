@@ -33,7 +33,7 @@ document.getElementById('fare-form').addEventListener('submit', function(event) 
         airlines: formData.get('airlines')
     };
 
-    fetch('/predict-fare', {
+    fetch('/predict', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -42,11 +42,7 @@ document.getElementById('fare-form').addEventListener('submit', function(event) 
     })
     .then(response => response.json())
     .then(result => {
-        document.getElementById('prediction-result').innerText = 'Predicted Fare: ' + result.fare;
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('prediction-result').innerText = 'An error occurred. Please try again.';
+        document.getElementById('prediction_text').innerText = 'Predicted Fare: ' + result.fare;
     });
 });
 
@@ -63,8 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             const predictionText = data.prediction_text;
-            const predictionResultDiv = document.getElementById('prediction-result');
-            predictionResultDiv.innerHTML = `<p>${predictionText}</p>`;
+            const predictionResultDiv = document.getElementById('prediction_text');
+            predictionResultDiv.innerHTML = `<p>${prediction_text}</p>`;
         })
         .catch(error => {
             console.error('Error:', error);
