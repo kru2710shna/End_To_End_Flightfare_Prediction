@@ -1,10 +1,54 @@
-// JavaScript to reset form fields on page reload/refresh
-window.onload = function() {
-    document.getElementById("fare-form").reset();
-};
+// Function to validate the flight booking form
+function validateForm() {
+    var fromLocation = document.getElementById("from-location").value;
+    var toLocation = document.getElementById("to-location").value;
+    if (fromLocation === toLocation) {
+        alert("Departure and destination locations cannot be the same.");
+        return false;
+    }
+    return true;
+}
 
-// Other existing JavaScript code
-window.addEventListener('scroll', function() {
+// Reset form fields on page reload/refresh
+function resetForm() {
+    document.getElementById("fare-form").reset();
+}
+
+//Validate form 
+function validateForm() {
+    var departureDate = document.getElementById("departure-date").value;
+    var arrivalDate = document.getElementById("arrival-date").value;
+    var stops = document.getElementById("stops").value;
+    var fromLocation = document.getElementById("from-location").value;
+    var toLocation = document.getElementById("to-location").value;
+    var airline = document.getElementById("airlines").value;
+
+    // Check for missing values
+    if (!departureDate || !arrivalDate || !stops || !fromLocation || !toLocation || !airline) {
+        alert("Please fill out all fields.");
+        return false;
+    }
+
+    // Check if departure and destination locations are the same
+    if (fromLocation === toLocation) {
+        alert("Departure and destination locations cannot be the same.");
+        return false;
+    }
+
+    return true;
+}
+
+
+// Handle form submission
+function handleFormSubmit(event) {
+    if (!validateForm()) {
+        event.preventDefault(); // Prevent form submission
+        window.location.reload(); // Reload the page to reset the form
+    }
+}
+
+// Handle scroll event
+function handleScroll() {
     var content = document.getElementById('content');
     var videoContainer = document.querySelector('.video-container');
 
@@ -18,52 +62,19 @@ window.addEventListener('scroll', function() {
     } else {
         content.style.zIndex = 2; // Content stays above video container
     }
+}
+
+// Consolidate all initializations in one window.onload
+window.onload = function() {
+    resetForm();
+};
+
+// Add event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('#fare-form');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    }
 });
 
-document.getElementById('fare-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    var formData = new FormData(event.target);
-    var data = {
-        departureDate: formData.get('departure-date'),
-        arrivalDate: formData.get('arrival-date'),
-        fromLocation: formData.get('from-location'),
-        toLocation: formData.get('to-location'),
-        stops: formData.get('stops'),
-        airlines: formData.get('airlines')
-    };
-
-    fetch('/predict', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        document.getElementById('prediction_text').innerText = 'Predicted Fare: ' + result.fare;
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
-
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        fetch('/predict', {
-            method: 'POST',
-            body: new FormData(form)
-        })
-        .then(response => response.json())
-        .then(data => {
-            const predictionText = data.prediction_text;
-            const predictionResultDiv = document.getElementById('prediction_text');
-            predictionResultDiv.innerHTML = `<p>${prediction_text}</p>`;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    });
-});
+window.addEventListener('scroll', handleScroll);

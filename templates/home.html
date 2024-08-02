@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idon'tKnow.Price.com</title>
+    <title>Idon'tKnow</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home_page.css') }}">
+    <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
+    
 </head>
+
 <body>
     <div class="video-container">
         <video autoplay muted loop id="bg-video">
@@ -13,7 +16,7 @@
         </video>
         <div class="overlay">
             <h1>Checkout Flight's Fare</h1>
-            <p>by Idon'tknow</p>
+            <p>by Idon'tKnow</p>
         </div>
     </div>
 
@@ -25,8 +28,10 @@
     </nav>
 
     <div id="content">
-        <h2>Idon'tknow Price</h2>
-        <p>Scroll down to explore more about our predictions and fare analysis.</p>
+        <h2>Idon'tKnow Flight Price</h2>
+        <p> This is a Supervised Machine learning Algorithm Solution. <br><br>
+            Scroll down to explore more about our predictions and fare analysis.
+        </p>
     </div>
     
     <div class="video-container-form">
@@ -40,12 +45,13 @@
 
 
 
-                <form id="fare-form" method="post" action="\predict">
+                <form id="fare-form" method="post" action="\predict" onsubmit="return validateForm()">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="departure-date">Departure Date:</label>
                             <input type="datetime-local" id="departure-date" name="departure-date" placeholder="Select Date">
                         </div>
+
                         <div class="form-group">
                             <label for="from-location">From:</label>
                             <select id="from-location" name="from-location">
@@ -56,6 +62,8 @@
                             </select>
                         </div>
                     </div>
+
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="arrival-date">Arrival Date:</label>
@@ -71,6 +79,8 @@
                             </select>
                         </div>
                     </div>
+
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="stops">Stops:</label>
@@ -91,14 +101,17 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit">Predict Fare</button>
 
-                    
+
+                    <button type="submit">Predict Fare</button>
                 </form>
 
                 
-                <h3>{{ prediction_text }}</h3>
-                <div id="prediction-result"></div>
+                
+                <div id="prediction-result">
+                    <h5>{{ prediction_text }}</h5>
+                </div>
+
             </div>
         </div>
     </div>

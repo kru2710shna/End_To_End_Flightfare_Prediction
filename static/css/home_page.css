@@ -69,12 +69,18 @@ body {
 }
 
 #content {
-    margin-top: 0px;
     padding: 10px;
     text-align: center;
     z-index: 2;
     position: relative;
     background-color: #001c28;
+    color: white;
+}
+
+#content p {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
     color: white;
 }
 
