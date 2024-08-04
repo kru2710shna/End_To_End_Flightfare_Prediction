@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template , jsonify
+from flask import Flask, request, render_template, jsonify
 from flask_cors import cross_origin
 import pandas as pd
 import pickle
@@ -11,21 +11,15 @@ app = Flask(__name__, static_url_path='/static')
 with open('latestfile_t.pkl', 'rb') as file:
     model = pickle.load(file)
 
-
-
 @app.route("/", methods=['GET'])
 @cross_origin()
 def home():
-    return render_template('home.html')
-
-
+    return render_template('home.html', prediction_text="")
 
 @app.route("/about", methods=['GET'])
 @cross_origin()
 def about():
     return render_template('aboutus.html')
-
-
 
 @app.route("/predict", methods=["GET", "POST"])
 @cross_origin()
@@ -61,11 +55,17 @@ def predict():
             Total_Stops = int(stops)
 
             # Prepare dictionaries for categorical variables
-            airline_dict = { ... }  # Define dictionary here
+            airline_dict = {
+                'Air India': 0, 'GoAir': 0, 'IndiGo': 0, 'Multiple carriers': 0, 
+                'Multiple carriers Premium economy': 0, 'SpiceJet': 0, 'Trujet': 0, 
+                'Vistara': 0, 'Vistara Premium economy': 0
+            }
             airline_dict[airline] = 1
-            source_dict = { ... }   # Define dictionary here
+            
+            source_dict = {'Chennai': 0, 'Delhi': 0, 'Kolkata': 0, 'Mumbai': 0}
             source_dict[from_location] = 1
-            dest_dict = { ... }     # Define dictionary here
+
+            dest_dict = {'Cochin': 0, 'New_Delhi': 0, 'Hyderabad': 0, 'Kolkata': 0}
             dest_dict[to_location] = 1
 
             # Predict fare using the model
@@ -97,7 +97,7 @@ def predict():
             # Handle the case where conversion fails
             return render_template('home.html', prediction_text="Please enter valid values for all fields.")
 
-    return render_template("home.html")
+    return render_template("home.html", prediction_text="")
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug=True)

@@ -1,21 +1,5 @@
 // Function to validate the flight booking form
 function validateForm() {
-    var fromLocation = document.getElementById("from-location").value;
-    var toLocation = document.getElementById("to-location").value;
-    if (fromLocation === toLocation) {
-        alert("Departure and destination locations cannot be the same.");
-        return false;
-    }
-    return true;
-}
-
-// Reset form fields on page reload/refresh
-function resetForm() {
-    document.getElementById("fare-form").reset();
-}
-
-//Validate form 
-function validateForm() {
     var departureDate = document.getElementById("departure-date").value;
     var arrivalDate = document.getElementById("arrival-date").value;
     var stops = document.getElementById("stops").value;
@@ -38,12 +22,15 @@ function validateForm() {
     return true;
 }
 
+// Reset form fields on page reload/refresh
+function resetForm() {
+    document.getElementById("fare-form").reset();
+}
 
 // Handle form submission
 function handleFormSubmit(event) {
     if (!validateForm()) {
         event.preventDefault(); // Prevent form submission
-        window.location.reload(); // Reload the page to reset the form
     }
 }
 
