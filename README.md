@@ -2,7 +2,9 @@
 
 ### Current Version: 0.0.1
 
-### Parent Company- IdontKnow
+### Parent Company: IdontKnow
+
+### Product: IdontknowFlightPrice
 
 ### Deployment Platform: Google Cloud Platform (GCP)
 
