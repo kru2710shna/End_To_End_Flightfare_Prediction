@@ -2,6 +2,8 @@
 
 ### Current Version: 0.0.1
 
+### Parent Company- IdontKnow
+
 ### Deployment Platform: Google Cloud Platform (GCP)
 
 ### Project Overview
